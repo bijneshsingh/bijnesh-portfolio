@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Bijnesh Kumar Singh Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<script>(function(){var s=null;try{s=localStorage.getItem("bs-theme")}catch(e){}document.documentElement.setAttribute("data-theme",s==="dark"?"dark":"light")})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Instrument+Serif:ital@1&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: left-aligned single column, 1120px max; hero pairs thesis with a live approval card; case studies alternate text + UI mock; status pills are the recurring motif */
+:root{
+  --bg:#F5F6F8; --surface:#FFFFFF; --sunk:#ECEEF3; --fg:#141726; --muted:#5A6075; --line:#DADDE6;
+  --accent:#4436D9; --accent-soft:#E6E3FF; --on-accent:#FFFFFF; --cta:#4436D9; --cta-hover:#3627C4; --cta-fg:#FFFFFF; --cta-glow:rgba(68,54,217,.28);
+  --ok:#137A4B; --ok-soft:#DDF3E7; --wait:#9A5B00; --wait-soft:#FCEFD6; --err:#B42335; --err-soft:#FBE1E4;
+  --display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,23,38,.06),0 12px 32px -12px rgba(20,23,38,.18);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F111A; --surface:#181B27; --sunk:#12141E; --fg:#ECEEF5; --muted:#9AA0B4; --line:#2A2E3D;
+  --accent:#9D95FF; --accent-soft:#25224A; --on-accent:#0F111A; --cta:#39E58C; --cta-hover:#5FF0A3; --cta-fg:#06210F; --cta-glow:rgba(57,229,140,.42);
+  --ok:#4FD093; --ok-soft:#163327; --wait:#F0B65A; --wait-soft:#33280F; --err:#FF7A8A; --err-soft:#3A1820;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px -12px rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F111A; --surface:#181B27; --sunk:#12141E; --fg:#ECEEF5; --muted:#9AA0B4; --line:#2A2E3D;
+  --accent:#9D95FF; --accent-soft:#25224A; --on-accent:#0F111A; --cta:#39E58C; --cta-hover:#5FF0A3; --cta-fg:#06210F; --cta-glow:rgba(57,229,140,.42);
+  --ok:#4FD093; --ok-soft:#163327; --wait:#F0B65A; --wait-soft:#33280F; --err:#FF7A8A; --err-soft:#3A1820;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px -12px rgba(0,0,0,.6); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+p{margin:0}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px 16px;padding-block:16px;flex-wrap:wrap;
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);
+  box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax);transition:border-color .2s;border-bottom:1px solid transparent}
+nav.scrolled{border-bottom-color:var(--line)}
+html{scroll-padding-top:84px}
+@media (max-width:600px){html{scroll-padding-top:120px}}
+.brand{font:italic 400 30px/1 "Instrument Serif",Georgia,"Times New Roman",serif;color:var(--fg);text-decoration:none;letter-spacing:-.01em;padding-block:2px}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:15px}
+.nav-links a:hover{color:var(--fg)}
+.nav-links{align-items:center}
+.theme-toggle{display:inline-grid;place-items:center;width:36px;height:36px;padding:0;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:50%;cursor:pointer}
+.theme-toggle:hover{border-color:var(--muted)}
+.theme-toggle .i-sun{display:none}
+.theme-toggle.is-dark .i-sun{display:block}.theme-toggle.is-dark .i-moon{display:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;padding-block:56px 88px}
+.hero>*{min-width:0}
+.hero h1{font-size:clamp(36px,5.4vw,62px);line-height:1.04;font-weight:700}
+
+.rotator{display:inline-block;vertical-align:bottom;height:1.12em;overflow:hidden;position:relative;transition:width .5s cubic-bezier(.65,0,.35,1)}
+.rot-track{display:flex;flex-direction:column;align-items:flex-start;gap:.4em}
+.rot-track>span{display:block;height:1.12em;line-height:1.12em;white-space:nowrap;padding-right:.06em}
+.rot-dot{font-family:var(--display);font-style:normal;font-weight:700;color:var(--fg);font-size:.93em}
+.rot-track.moving{transition:transform .6s cubic-bezier(.65,0,.35,1)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hero h1 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-size:1.08em;letter-spacing:-.01em;color:var(--cta)}
+.hero .lede{margin-top:24px;font-size:18px;color:var(--muted);max-width:56ch}
+.hero .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.chip{font-family:var(--mono);font-size:12px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--surface)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.btn{font:600 15px var(--body);padding:12px 18px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--cta);border-color:var(--cta);color:var(--cta-fg);box-shadow:0 6px 20px -8px var(--cta-glow);transition:background .15s,box-shadow .15s,transform .15s}
+.btn.primary:hover{background:var(--cta-hover);border-color:var(--cta-hover);box-shadow:0 10px 28px -8px var(--cta-glow);transform:translateY(-1px)}
+.btn:not(.primary):hover{border-color:var(--muted)}
+
+/* status pill motif */
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.wait{color:var(--wait);background:var(--wait-soft)}
+.pill.ok{color:var(--ok);background:var(--ok-soft)}
+.pill.err{color:var(--err);background:var(--err-soft)}
+.pill.info{color:var(--accent);background:var(--accent-soft)}
+
+/* approval card */
+.approve{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:20px;display:grid;gap:14px}
+.approve-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.approve-head strong{font-family:var(--display);font-size:17px}
+.post{background:var(--sunk);border-radius:12px;padding:14px;display:grid;gap:10px}
+.post-img{aspect-ratio:16/8;max-width:100%;border-radius:8px;background:
+  radial-gradient(circle at 30% 40%,var(--accent-soft) 0 22%,transparent 23%),
+  linear-gradient(135deg,var(--accent) 0%,var(--ok) 140%);opacity:.85}
+.post p{font-size:14.5px}
+.why{font-size:13px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.actions .btn{padding:9px 14px;font-size:14px}
+.note{font-size:12.5px;color:var(--muted)}
+
+.portrait{margin:0;justify-self:end;width:100%;max-width:400px;display:grid;gap:14px}
+.portrait img{display:block;width:100%;height:auto;aspect-ratio:5/6;object-fit:cover;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--sunk)}
+.portrait figcaption{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+@media (max-width:860px){.portrait{justify-self:start;max-width:320px}}
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:start}
+.about>*{min-width:0}
+.about-body{display:grid;gap:18px}
+.about-photo{display:block;width:100%;max-width:340px;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow);margin-top:16px;background:var(--sunk)}
+@media (max-width:860px){.about-photo{max-width:280px}}
+.about-body>p{color:var(--muted);font-size:17px;max-width:65ch}
+.about-side{display:grid;gap:28px}
+.about-stats{display:grid;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.about-stats li{display:grid;grid-template-columns:96px 1fr;align-items:center;gap:16px;padding-block:16px;border-bottom:1px solid var(--line)}
+.about-stats b{font-family:var(--display);font-size:44px;line-height:1;font-weight:700;letter-spacing:-.02em;color:var(--accent)}
+.about-stats span{font-size:14.5px;color:var(--muted);line-height:1.45}
+.about-facts{display:grid;gap:14px}
+.about-facts div{display:grid;gap:4px;min-width:0}
+.about-facts span:last-child{font-size:14.5px;font-weight:500}
+@media (max-width:860px){.about{grid-template-columns:1fr;gap:24px}}
+@media (max-width:520px){.about-facts{grid-template-columns:1fr}}
+
+/* case study entries (from v2) */
+.sec-head.work-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:12px 56px;max-width:none;align-items:start;margin-bottom:72px}
+.work-head .label{grid-column:1/-1}
+.work-head p:last-child{max-width:52ch}
+.proj-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:20px 56px;align-items:start}
+.proj-l,.proj-r{display:grid;gap:18px;min-width:0;align-content:start}
+.proj-r .highlights{flex-direction:column;gap:6px;font-size:15px}
+.proj-r .highlights span{display:flex;align-items:center;gap:10px}
+.proj .proj-r .highlights span::before,.proj .proj-r .highlights span+span::before{content:"";margin:0;color:inherit;width:6px;height:6px;border-radius:50%;background:var(--cta);flex:none}
+@media (max-width:900px){.sec-head.work-head,.proj-head{grid-template-columns:1fr}.sec-head.work-head{margin-bottom:48px}}
+
+.proj{display:grid;gap:22px}
+.proj+.proj{margin-top:112px}
+.proj-meta{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:baseline}
+.proj-meta .num{font:500 13px var(--mono);color:var(--muted)}
+.proj-meta .name{font-weight:600;font-size:16px}
+.proj-meta .what{color:var(--muted);font-size:15px}
+.proj h3{font-family:var(--display);font-weight:600;font-size:clamp(28px,3.6vw,46px);line-height:1.08;letter-spacing:-.025em;max-width:22ch;text-wrap:balance}
+.proj h3 em{color:var(--cta);font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-size:1.06em;letter-spacing:-.01em}
+.proj .highlights{display:flex;flex-wrap:wrap;gap:6px 0;color:var(--muted);font-size:16px}
+.proj .highlights span+span::before{content:"•";margin:0 12px;color:var(--line)}
+.proj .summary{max-width:64ch;color:var(--muted);font-size:16.5px}
+.arrow-link{display:inline-flex;align-items:center;gap:6px;font-weight:500;font-size:16px;color:var(--cta);text-decoration:none}
+.arrow-link span{transition:transform .2s}
+.arrow-link:hover span{transform:translateX(4px)}
+.arrow-link:hover{color:var(--cta-hover)}
+.arrow-btn{display:inline-flex;align-items:center;gap:8px}
+.arrow-btn span{transition:transform .2s}
+.arrow-btn:hover span{transform:translateX(3px)}
+.gallery{position:relative;overflow:hidden;margin-top:12px;margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.track{display:flex;gap:18px;width:max-content;padding-block:8px 20px}
+.tile{flex:none;width:clamp(260px,34vw,440px);aspect-ratio:16/10;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--sunk);box-shadow:var(--shadow);margin:0}
+.tile-link{position:relative;display:block;text-decoration:none}
+.tile-tag{position:absolute;left:12px;top:12px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;background:#0D0418;color:#34D399;padding:6px 10px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+@media (prefers-reduced-motion:no-preference){.track{animation:marquee var(--dur,60s) linear infinite}.gallery:hover .track{animation-play-state:paused}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.gallery{overflow-x:auto}.track .dup{display:none}}
+@media (max-width:560px){.proj .highlights{flex-direction:column;gap:4px}.proj .highlights span+span::before{content:none}}
+
+/* sections */
+section{padding-block:72px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:10px;margin-bottom:40px;max-width:68ch}
+.sec-head h2{font-size:clamp(28px,3.6vw,40px);line-height:1.1}
+.sec-head p{color:var(--muted);font-size:17px}
+
+/* case study */
+.case{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.case+.case{margin-top:88px}
+.case>*{min-width:0}
+.case h3{font-size:clamp(24px,2.8vw,32px);line-height:1.15;margin-top:8px}
+.case .summary{margin-top:14px;color:var(--muted);font-size:17px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;padding-block:16px;border-block:1px solid var(--line)}
+.facts div{display:grid;gap:4px;min-width:0}
+.facts span:last-child{font-size:14px;font-weight:500}
+.case-more{grid-column:1/-1;display:grid;gap:56px;padding-top:40px;border-top:1px solid var(--line)}
+.cm-row{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.cm-row>*{min-width:0}
+.cm-text h4{font-family:var(--display);font-size:20px;margin:0 0 10px}
+.cm-text p,.cm-text li{color:var(--muted);font-size:15.5px}
+.cm-text ul{margin:0;padding-left:18px;display:grid;gap:8px}
+.cm-text li strong{color:var(--fg);font-weight:600}
+.cm-text h5{font-family:var(--display);font-size:16px;margin:22px 0 6px;padding-top:18px;border-top:1px solid var(--line)}
+.illo{margin:0}
+.review{border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:10px;background:var(--bg)}
+.review-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.review-head b{font-size:14px}
+.review-why{font-size:13px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px}
+.review-actions{display:flex;gap:8px;flex-wrap:wrap}
+.fake-btn{display:inline-flex;align-items:center;font:600 13px var(--body);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);white-space:nowrap}
+.fake-btn.primary{background:var(--cta);border-color:var(--cta);color:var(--cta-fg)}
+.loop-frame{padding:16px}
+.loop-frame svg{display:block;width:100%;height:auto;max-width:440px;margin:0 auto}
+.loop-frame .ring{fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:4 6}
+.loop-frame .arr{fill:var(--muted)}
+.loop-frame .node rect{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.loop-frame .node text{fill:var(--fg);font:600 14px var(--body)}
+.loop-frame .node .n{fill:var(--muted);font:500 11px var(--mono)}
+.loop-frame .node.ship rect{fill:var(--cta);stroke:var(--cta)}
+.loop-frame .node.ship text,.loop-frame .node.ship .n{fill:var(--cta-fg)}
+.loop-frame .center-t{fill:var(--fg);font:700 18px var(--display)}
+.loop-frame .center-s{fill:var(--muted);font:400 13px var(--body)}
+.loop-legend{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;font-size:12.5px;color:var(--muted);padding-top:6px}
+.loop-legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dot.me{background:var(--ok)}.dot.ai{background:var(--accent)}
+.flow{grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:10px}
+.flow-step{display:grid;gap:6px;justify-items:start;min-width:0}
+.flow-step b{font-size:14px;margin-top:4px}
+.flow-step small{font-size:12px;color:var(--muted);line-height:1.4}
+.flow-arrow{color:var(--muted);font-size:18px;padding-top:4px}
+@media (max-width:860px){.cm-row{grid-template-columns:1fr;gap:24px}.cm-row.flip .illo{order:2}}
+@media (max-width:520px){.flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg);justify-self:start;padding:0 0 0 8px}}
+.cm-cta{margin-top:24px}
+.story{display:grid;gap:22px;margin-top:28px}
+.story h4{font-family:var(--display);font-size:17px;margin:0 0 6px}
+.story p,.story li{color:var(--muted);font-size:15.5px}
+.story ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.story li strong{color:var(--fg);font-weight:600}
+
+/* mock frames */
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.frame-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--sunk)}
+.frame-bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.frame-bar span{margin-left:8px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.frame-body{padding:18px;display:grid;gap:12px}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px}
+.row .ic{width:34px;height:34px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font:700 13px var(--display)}
+.row b{display:block;font-size:14px}
+.row small{color:var(--muted);font-size:12.5px}
+.row>div{min-width:0}
+.states{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.state{border:1px dashed var(--line);border-radius:10px;padding:12px;display:grid;gap:8px;min-width:0}
+.state p{font-size:12.5px;color:var(--muted)}
+.skel{height:8px;border-radius:4px;background:var(--sunk)}
+.caption{font-size:13px;color:var(--muted);margin-top:12px}
+
+/* website mock */
+.site{display:grid;gap:10px}
+.frame .shot{display:block;width:100%;height:auto;max-width:100%;border-bottom:1px solid var(--line)}
+.site .blk{border-radius:8px;background:var(--sunk);padding:12px;display:grid;gap:6px}
+.site .blk.hero-blk{background:var(--accent-soft)}
+.site .ln{height:8px;border-radius:4px;background:var(--line)}
+.site .ln.h{height:14px;width:70%;background:var(--accent);opacity:.7}
+.site .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.site .cols div{height:46px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.pages{display:flex;flex-wrap:wrap;gap:6px}
+
+/* process */
+.process{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 24px}
+.step{display:grid;gap:8px;align-content:start;padding-top:14px;border-top:2px solid var(--fg);min-width:0}
+.step h3{font-size:19px}
+.step p{color:var(--muted);font-size:15px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+
+/* timeline */
+.timeline{display:grid}
+.tl{display:grid;grid-template-columns:150px 1fr;gap:24px;padding-block:20px;border-bottom:1px solid var(--line)}
+.tl>*{min-width:0}
+.tl .yr{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
+.tl h3{font-size:19px}
+.tl .co{color:var(--accent);font-weight:500;font-size:15px}
+.tl p{color:var(--muted);font-size:15px;margin-top:6px;max-width:68ch}
+
+.certs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 32px;margin-top:40px;padding:0;list-style:none}
+.certs li{font-size:14.5px;color:var(--muted);padding-block:6px;border-bottom:1px dashed var(--line)}
+.certs li b{color:var(--fg);font-weight:500}
+.certs li a{text-decoration:underline;text-decoration-color:var(--line);text-decoration-thickness:1px;text-underline-offset:4px}
+.certs li a b{color:var(--fg);transition:color .15s}
+.certs li a:hover{text-decoration-color:var(--accent)}
+.certs li a:hover b{color:var(--accent)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end}
+.contact>*{min-width:0}
+.contact h2{font-size:clamp(32px,4.4vw,52px);line-height:1.05}
+.email{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.email .mail{font-family:var(--mono);font-size:16px;background:var(--surface);border:1px solid var(--line);padding:10px 14px;border-radius:10px;overflow-wrap:anywhere;color:var(--cta);text-decoration:none}
+.email .mail:hover{text-decoration:underline;text-underline-offset:3px}
+.email code{font-family:var(--mono);font-size:16px;background:var(--surface);border:1px solid var(--line);padding:10px 14px;border-radius:10px;user-select:all;overflow-wrap:anywhere}
+.links{display:grid;gap:10px}
+.links a{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-weight:500}
+.links a span{color:var(--muted);font-family:var(--mono);font-size:12px}
+.links a:hover{color:var(--accent)}
+footer{padding-block:40px;color:var(--muted);font-size:13px}
+
+@media (max-width:860px){
+  .hero,.case,.contact{grid-template-columns:1fr;gap:36px}
+  .case.flip .mock{order:2}
+  .process{grid-template-columns:repeat(2,1fr)}
+  .certs{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .facts{grid-template-columns:1fr 1fr}
+  .process{grid-template-columns:1fr}
+  .tl{grid-template-columns:1fr;gap:6px}
+  .states{grid-template-columns:1fr}
+  .hero{padding-block:24px 64px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .approve,.pill{transition:all .25s ease}
+}
+</style>
+
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#top" aria-label="Bijnesh Kumar Singh, home">Bijnesh Kumar Singh</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
+        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <p class="label">Principal Product Designer · UX Research · Hyderabad</p>
+      <h1 style="margin-top:14px">I make complex products simple, and AI products <em class="rotator"><span class="sr-only">trustworthy</span><span class="rot-track" aria-hidden="true"><span>trustworthy</span><span>transparent</span><span>explainable</span><span>dependable</span><span>intuitive</span><span>trustworthy</span></span></em></h1>
+      <p class="lede">10+ years designing for AI SaaS, fintech, media and e‑commerce. I start with users, through conversations, usability tests and analytics, and turn what I learn into products that are easy to understand and use. Lately that work includes AI products, where people need to see what the AI is doing and stay in control. I also vibe code: I take my designs to working, deployed prototypes by directing AI coding agents like Replit.</p>
+      <div class="meta">
+        <span class="chip">AI product design</span>
+        <span class="chip">User research</span>
+        <span class="chip">Human‑in‑the‑loop UX</span>
+        <span class="chip">Design systems</span>
+        <span class="chip">AI‑assisted prototyping</span>
+        <span class="chip">Vibe coding</span>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="#work">See Case Studies</a>
+        <a class="btn" href="Bijnesh-Singh-Resume.pdf" target="_blank" rel="noopener">Download Resume ↓</a>
+      </div>
+    </div>
+
+    <figure class="portrait">
+      <img src="bijnesh.jpg" alt="Bijnesh Kumar Singh, Principal Product Designer" width="800" height="960">
+      <figcaption><span class="pill ok">Open to work</span><span>Based in Hyderabad, India</span></figcaption>
+    </figure>
+  </header>
+
+  <section id="work">
+    <div class="sec-head work-head">
+      <p class="label">Selected work</p>
+      <h2>Zylo5: an AI marketing platform for small businesses</h2>
+      <p>At BuzzBoard I worked on Zylo5, an agentic AI platform that runs social posts, ads, email, SEO and reviews for local businesses. Two parts of that work are below.</p>
+    </div>
+
+    <article class="proj">
+      <div class="proj-head">
+        <div class="proj-l">
+          <div class="proj-meta"><span class="num">01</span><span class="name">Zylo5 App</span><span class="what">Product UI/UX · Aug – Sept 2026</span></div>
+          <h3>Keeping owners in control of an AI that <em>acts</em> for them</h3>
+        </div>
+        <div class="proj-r">
+          <p class="summary">An AI marketing platform for small businesses. The owner types a business name, Zylo's agents draft the brand kit, ads, posts, review replies and website content, and the owner just approves.</p>
+          <p class="highlights"><span>Full product, all modules</span><span>Six patterns reused everywhere</span><span>Prompt‑driven build I directed</span></p>
+          <div><a class="btn primary arrow-btn" href="zylo-app/index.html">View Case Study <span>→</span></a></div>
+        </div>
+      </div>
+      <div class="gallery" style="--dur:70s" aria-label="Zylo5 app screens">
+        <div class="track">
+          <a class="tile tile-link" href="zylo-dashboard/index.html"><img src="img/app-00-dashboard.jpg" alt="Concept: Zylo dashboard" loading="lazy"><span class="tile-tag">Zylo Dashboard</span></a>
+          <figure class="tile"><img src="img/app-01-scan.jpg" alt="Free scan: tell me your business name" loading="lazy"></figure>
+          <figure class="tile"><img src="img/app-02-google-ads.jpg" alt="Google Ads with four drafted angles" loading="lazy"></figure>
+          <figure class="tile"><img src="img/app-03-meta-ads.jpg" alt="Meta Ads: pick the angle that lands" loading="lazy"></figure>
+          <figure class="tile"><img src="img/app-04-brand-kit.jpg" alt="Brand Kit" loading="lazy"></figure>
+          <figure class="tile"><img src="img/app-05-media.jpg" alt="Media library" loading="lazy"></figure>
+          <figure class="tile"><img src="img/app-06-google-listing.jpg" alt="Google Listing: saved listing beside draft changes" loading="lazy"></figure>
+          <figure class="tile"><img src="img/app-07-social.jpg" alt="Social: nine drafted posts" loading="lazy"></figure>
+          <figure class="tile"><img src="img/app-08-reviews.jpg" alt="Reviews with drafted replies" loading="lazy"></figure>
+          <figure class="tile"><img src="img/app-09-blog.jpg" alt="Blog: three angles to start from" loading="lazy"></figure>
+          <a class="tile tile-link dup" href="zylo-dashboard/index.html" aria-hidden="true" tabindex="-1"><img src="img/app-00-dashboard.jpg" alt="" loading="lazy"><span class="tile-tag">Zylo Dashboard</span></a>
+          <figure class="tile dup" aria-hidden="true"><img src="img/app-01-scan.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/app-02-google-ads.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/app-03-meta-ads.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/app-04-brand-kit.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/app-05-media.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/app-06-google-listing.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/app-07-social.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/app-08-reviews.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/app-09-blog.jpg" alt="" loading="lazy"></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="proj-head">
+        <div class="proj-l">
+          <div class="proj-meta"><span class="num">02</span><span class="name">Zylo5 Website</span><span class="what">UI/UX design · Sept 2026</span></div>
+          <h3>Making a multi‑channel AI product <em>clear</em> in seconds</h3>
+        </div>
+        <div class="proj-r">
+          <p class="summary">The website had to explain reviews, social, ads, email and web in a few seconds, build trust in AI output, and get a busy café, salon or trades owner to start a free trial.</p>
+          <p class="highlights"><span>7 pages, desktop 1440</span><span>One‑field first step</span><span>Results before explanation</span></p>
+          <div><a class="btn primary arrow-btn" href="zylo-website/index.html">View Case Study <span>→</span></a></div>
+        </div>
+      </div>
+      <div class="gallery" style="--dur:60s" aria-label="Zylo5 website pages">
+        <div class="track">
+          <figure class="tile"><img src="img/web-01.jpg" alt="Homepage: your business, seen everywhere" loading="lazy"></figure>
+          <figure class="tile"><img src="img/web-02.jpg" alt="Marketing examples page" loading="lazy"></figure>
+          <figure class="tile"><img src="img/web-03.jpg" alt="How it works page" loading="lazy"></figure>
+          <figure class="tile"><img src="img/web-04.jpg" alt="Pricing page" loading="lazy"></figure>
+          <figure class="tile"><img src="img/web-05.jpg" alt="Compare page" loading="lazy"></figure>
+          <figure class="tile"><img src="img/web-06.jpg" alt="Company page" loading="lazy"></figure>
+          <figure class="tile"><img src="img/web-07.jpg" alt="Blog page" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/web-01.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/web-02.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/web-03.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/web-04.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/web-05.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/web-06.jpg" alt="" loading="lazy"></figure>
+          <figure class="tile dup" aria-hidden="true"><img src="img/web-07.jpg" alt="" loading="lazy"></figure>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="about">
+    <div class="about">
+      <div class="about-side">
+        <div class="sec-head" style="margin-bottom:0">
+          <p class="label">About me</p>
+          <h2>From pixels to product, and now to AI</h2>
+        </div>
+        <ul class="about-stats">
+          <li><b>10+</b><span>years in UI/UX and product design</span></li>
+          <li><b>4</b><span>industries: AI SaaS, fintech, media and e‑commerce</span></li>
+          <li><b>9</b><span>certifications in AI, UX, vibe coding and design thinking</span></li>
+        </ul>
+        <div class="about-facts">
+          <div><span class="label">Focus</span><span>AI product design, human‑in‑the‑loop UX, vibe coding</span></div>
+          <div><span class="label">Languages</span><span>English, Hindi</span></div>
+        </div>
+      </div>
+      <div class="about-body">
+        <p>I'm Bijnesh, a Principal Product Designer based in Hyderabad, with user research at the core of how I work. I started in web and graphic design, building websites, campaigns and HTML mailers for brands like Indiabulls, Investors Clinic and Amrapali Group. That gave me a strong visual and front‑end foundation, and over the years my work moved from screens to systems: UX strategy, information architecture, design systems and end‑to‑end product design across AI SaaS, fintech, media and e‑commerce.</p>
+        <p>For the last few years I have focused on AI products. At BuzzBoard I worked on Zylo5, an agentic AI marketing platform, where the core design question was trust: how do you let an AI act for a business owner while keeping the owner in control? That shaped how I design today. Clear approval steps, honest status and error states, and a reason beside every suggestion.</p>
+        <p>I also use AI in my own process. Tools like Claude, Figma MCP, Google Stitch, Lovable and Replit let me go from idea to a working concept quickly, so teams can react to something real early. The design decisions stay mine.</p>
+        <p>To take that further, I completed <a href="https://www.deeplearning.ai/accomplishments/70faf49b-e811-4822-9a97-acd46fb8f84f?usp=sharing" target="_blank" rel="noopener">Vibe Coding 101 with Replit</a> from DeepLearning.AI. It taught me to build full‑stack web apps with an AI agent: write a clear product spec, prompt in small steps, test and debug what the agent builds, and deploy. For a designer, that means I can hand a team a working prototype, not just a Figma file, and I understand what it takes for developers to build what I design.</p>
+        <a class="btn primary" style="justify-self:start" href="Bijnesh-Singh-Resume.pdf" target="_blank" rel="noopener">Download Resume ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="sec-head">
+      <p class="label">How I work</p>
+      <h2>A process that fits the problem, not the other way round</h2>
+      <p>Whether it is a fintech app, a media microsite or a SaaS platform, I follow the same core steps. The depth of each step changes with the project, the timeline and the team.</p>
+    </div>
+    <div class="process">
+      <div class="step"><span class="label">Step 1</span><h3>Understand</h3><p>Talk to stakeholders and users, review analytics and run UX audits to learn the business goal, who the users are and where the current experience fails them.</p></div>
+      <div class="step"><span class="label">Step 2</span><h3>Define</h3><p>Turn findings into a clear problem statement, user journeys and success measures, so the team agrees on what we are solving before anyone opens Figma.</p></div>
+      <div class="step"><span class="label">Step 3</span><h3>Structure</h3><p>Information architecture, task flows and low‑fidelity wireframes, covering edge cases, empty states and errors as well as the happy path.</p></div>
+      <div class="step"><span class="label">Step 4</span><h3>Design and prototype</h3><p>High‑fidelity UI built on a design system, with clickable prototypes. I use AI tools to explore options quickly, then refine by hand, and when a flow needs real data I vibe code a working prototype.</p></div>
+      <div class="step"><span class="label">Step 5</span><h3>Test and iterate</h3><p>Usability tests with real users, then revise. Small, frequent rounds catch problems while they are still cheap to fix.</p></div>
+      <div class="step"><span class="label">Step 6</span><h3>Hand off and measure</h3><p>Developer‑ready specs and components, design QA during build, and a look at the numbers after launch to plan the next round.</p></div>
+    </div>
+    <div class="tools">
+      <span class="chip">Figma</span><span class="chip">FigJam</span><span class="chip">Claude + Figma MCP</span><span class="chip">ChatGPT</span><span class="chip">Google Stitch</span><span class="chip">Lovable</span><span class="chip">Replit</span><span class="chip">Adobe Creative Cloud</span>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <p class="label">Experience</p>
+      <h2>Where I have done this work</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl"><span class="yr">2020 – 2026</span><div><h3>Principal Product UI Designer</h3><span class="co">BuzzBoard, Inc.</span><p>Zylo5, an agentic AI marketing platform for SMBs. Led UI/UX and brand compliance across modules and onboarding; standardised status, loading and error states.</p></div></div>
+      <div class="tl"><span class="yr">2017 – 2020</span><div><h3>UI/UX Designer, Assistant Manager</h3><span class="co">Karvy Next Limited</span><p>Wireframes and prototypes from product specs and user behaviour; websites and mobile apps across multiple fintech products, working closely with developers.</p></div></div>
+      <div class="tl"><span class="yr">2017</span><div><h3>UI/Visual Design Consultant</h3><span class="co">The Economic Times</span><p>Microsites for The Economic Times and ET Money, web and WAP campaigns, and web and mobile app UI screens.</p></div></div>
+      <div class="tl"><span class="yr">2016 – 2017</span><div><h3>Lead UI Designer</h3><span class="co">TechnoXom Pvt. Ltd.</span><p>Owned design end to end: research, task flows, wireframes, prototypes and final UI across web and mobile.</p></div></div>
+      <div class="tl"><span class="yr">Earlier</span><div><h3>Web and graphic design</h3><span class="co">Fashion And You · Great Web Solutions</span><p>Websites, campaigns and mailers for brands including Indiabulls. The visual and front‑end foundation behind my UX work.</p></div></div>
+    </div>
+    <p class="label" style="margin-top:40px">Certifications</p>
+    <ul class="certs" style="margin-top:12px">
+      <li><a href="https://www.deeplearning.ai/accomplishments/70faf49b-e811-4822-9a97-acd46fb8f84f?usp=sharing" target="_blank" rel="noopener"><b>Vibe Coding 101 with Replit</b></a> · DeepLearning.AI</li>
+      <li><a href="https://coursera.org/share/b212ca65d7843446e75071b17dc5f4bb" target="_blank" rel="noopener"><b>AI For Everyone</b></a> · Coursera</li>
+      <li><a href="https://app.uxcel.com/certificates/QOV3EUFIYZTW" target="_blank" rel="noopener"><b>Enhancing UX Workflow with AI</b></a> · Uxcel</li>
+      <li><a href="https://www.skills.google/public_profiles/2da98ebb-63a0-42f4-aee6-9e826c853969/badges/3970679?utm_medium=social&amp;utm_source=linkedin&amp;utm_campaign=ql-social-share" target="_blank" rel="noopener"><b>Introduction to Generative AI</b></a> · Google Cloud</li>
+      <li><a href="https://www.skills.google/public_profiles/2da98ebb-63a0-42f4-aee6-9e826c853969/badges/12972761?utm_campaign=ql-social-share&amp;utm_medium=social&amp;utm_source=linkedin" target="_blank" rel="noopener"><b>Conversation Design Fundamentals</b></a> · Google Cloud</li>
+      <li><a href="https://ixdf.org/members/bijnesh-kumar-singh/certificate/course/8ec74267-7c91-4309-be01-4e3a5675d1eb" target="_blank" rel="noopener"><b>UX Management: Strategy and Tactics</b></a> · IxDF</li>
+      <li><a href="https://www.udemy.com/certificate/UC-3MONMZYC/" target="_blank" rel="noopener"><b>User Experience Certification</b></a> · Udemy</li>
+      <li><a href="https://www.udemy.com/certificate/UC-7XRIKTTL/" target="_blank" rel="noopener"><b>Mobile App Design</b></a> · Udemy</li>
+      <li><a href="https://www.udemy.com/certificate/UC-0YM0B68Z/" target="_blank" rel="noopener"><b>Cooper Crash Course: Design Thinking in 3 Steps</b></a> · Udemy</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <div class="contact">
+      <div>
+        <p class="label">Open to Product Designer, AI Product Designer and UX Research roles</p>
+        <h2 style="margin-top:14px">Let's talk about what your AI product needs.</h2>
+        <div class="email">
+          <a class="mail" id="emailText" href="mailto:bijneshman@gmail.com">bijneshman@gmail.com</a>
+        </div>
+        <div class="email" style="margin-top:12px">
+          <code id="phoneText">+91 95604 18600</code>
+        </div>
+      </div>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/bijnesh/" target="_blank" rel="noopener">LinkedIn <span>/in/bijnesh ↗</span></a>
+        <a href="https://www.behance.net/bijnesh" target="_blank" rel="noopener">Behance <span>/bijnesh ↗</span></a>
+        <a href="https://bijnesh.netlify.app/" target="_blank" rel="noopener">Portfolio <span>bijnesh.netlify.app ↗</span></a>
+        <a href="https://www.zylo5.com" target="_blank" rel="noopener">Zylo5 <span>zylo5.com ↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Bijnesh Kumar Singh · Hyderabad, India</footer>
+</div>
+
+<script>
+(function(){
+  var r=document.querySelector('.rotator'); if(!r) return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var tr=r.querySelector('.rot-track'), items=[].slice.call(tr.children), n=items.length-1, i=0;
+  function w(k){return items[k].getBoundingClientRect().width;}
+  function h(){return items[1].getBoundingClientRect().top-items[0].getBoundingClientRect().top;}
+  function mx(){var m=0;items.forEach(function(el){m=Math.max(m,el.getBoundingClientRect().width)});return m;}
+  r.style.width=mx()+'px';
+  setInterval(function(){
+    i++; tr.classList.add('moving'); tr.style.transform='translateY('+(-i*h())+'px)';
+    if(i===n){ setTimeout(function(){ tr.classList.remove('moving'); tr.style.transform='translateY(0)'; i=0; },650); }
+  },2400);
+  window.addEventListener('resize',function(){ tr.classList.remove('moving'); tr.style.transform='translateY('+(-i*h())+'px)'; r.style.width=mx()+'px'; });
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ r.style.width=mx()+'px'; });
+})();
+</script>
+<script>
+(function(){var n=document.querySelector('nav');function f(){n.classList.toggle('scrolled',window.scrollY>8);}window.addEventListener('scroll',f,{passive:true});f();})();
+(function(){
+  var root=document.documentElement,b=document.getElementById('themeToggle');
+  var mq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+  
+  function isDark(){var a=root.getAttribute('data-theme');return a?a==='dark':!!(mq&&mq.matches);}
+  function sync(){var d=isDark();b.classList.toggle('is-dark',d);var m=d?'Switch to light theme':'Switch to dark theme';b.setAttribute('aria-label',m);b.title=m;}
+  b.addEventListener('click',function(){var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('bs-theme',n);}catch(e){}sync();});
+  if(mq&&mq.addEventListener)mq.addEventListener('change',sync);
+  sync();
+})();
+(function(){
+  document.querySelectorAll('.copy').forEach(function(copy){
+    var em=document.getElementById(copy.dataset.copy);
+    copy.addEventListener('click',function(){
+      function sel(){var r=document.createRange();r.selectNodeContents(em);var s=getSelection();s.removeAllRanges();s.addRange(r);copy.textContent='Selected, Press Ctrl+C';}
+      try{navigator.clipboard.writeText(em.textContent).then(function(){copy.textContent='Copied';setTimeout(function(){copy.textContent=copy.dataset.label},2000)},sel);}catch(e){sel();}
+    });
+  });
+})();
+</script>
+</body></html>
