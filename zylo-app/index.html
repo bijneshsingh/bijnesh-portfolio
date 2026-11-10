@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Zylo App Case Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600;700;900&family=DM+Mono:wght@500&display=swap">
+<style>
+/* Layout: single committed Zylo dark world; slides stacked in one centred column, a slim mono header naming author and role */
+:root{--bg:#0D0418;--fg:rgba(255,255,255,.92);--sub:rgba(255,255,255,.55);--mint:#34D399;--line:rgba(255,255,255,.1);
+  --ff:"Geologica","Segoe UI",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--ff);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1200px;margin:0 auto;padding-block:32px 64px;display:grid;gap:24px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header p{margin:0;font:500 11px var(--mono);letter-spacing:2.5px;text-transform:uppercase;color:var(--sub)}
+header p b{color:var(--mint);font-weight:500}
+header a{color:var(--mint);font:500 11px var(--mono);letter-spacing:2px;text-transform:uppercase;text-decoration:none}
+header a:hover{text-decoration:underline}
+figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+figure img{display:block;width:100%;height:auto;max-width:100%}
+footer{text-align:center;font:500 11px var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--sub);padding-top:16px}
+a:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+
+/* concept section */
+.next{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:radial-gradient(ellipse 60% 50% at 0% 0%,rgba(91,33,182,.45),transparent 60%),#120626}
+.next-in{padding:56px clamp(20px,5vw,72px);display:grid;gap:40px}
+.eyebrow{display:flex;align-items:center;gap:10px;font:500 11px var(--mono);letter-spacing:3px;text-transform:uppercase;color:var(--mint)}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
+.next h2{margin:14px 0 0;font-size:clamp(32px,4.6vw,56px);font-weight:900;letter-spacing:-2px;line-height:1;color:#fff;text-wrap:balance}
+.next h2 em{font-style:normal;color:var(--mint)}
+.lede{margin:18px 0 0;max-width:64ch;font-size:18px;font-weight:300;line-height:1.65;color:rgba(255,255,255,.7)}
+.badge{display:inline-block;margin-top:18px;font:500 11px var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:#F5C451;border:1px solid rgba(245,196,81,.4);background:rgba(245,196,81,.08);padding:6px 12px;border-radius:99px}
+.pi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pi div{border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:rgba(255,255,255,.03)}
+.pi .k{font:500 10px var(--mono);letter-spacing:2.5px;text-transform:uppercase;color:var(--mint)}
+.pi h3{margin:10px 0 8px;font-size:20px;font-weight:700;color:#fff;letter-spacing:-.4px}
+.pi p{margin:0;font-size:15.5px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.68)}
+.shot{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 70px -30px rgba(0,0,0,.7)}
+.shot img{display:block;width:100%;height:auto}
+.cap{margin:12px 0 0;font:500 11px var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--sub)}
+.dec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.dec div{border-top:2px solid var(--mint);padding-top:16px}
+.dec .n{font:500 11px var(--mono);color:var(--mint);letter-spacing:2px}
+.dec h4{margin:8px 0 6px;font-size:17px;font-weight:700;color:#fff}
+.dec p{margin:0;font-size:14.5px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.66)}
+.measure{display:flex;flex-wrap:wrap;gap:10px}
+.measure span{font-size:14px;color:rgba(255,255,255,.8);border:1px solid var(--line);border-radius:99px;padding:8px 14px;background:rgba(255,255,255,.03)}
+@media (max-width:820px){.pi,.dec{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+  <header>
+    <p><b>Zylo⁵ app</b> · Product UI/UX case study · Bijnesh Kumar Singh</p>
+    <a href="../index.html">← Portfolio</a>
+  </header>
+  <figure><img src="s01.jpg" width="1600" height="1251" alt="Zylo app cover: Brand Kit, Zylo dashboard and Google Ads screens"></figure>
+  <figure><img src="s02.jpg" width="1600" height="1201" alt="Overview: the problem, the idea and the design goal" loading="lazy"></figure>
+  <figure><img src="s12.jpg" width="1600" height="1043" alt="Before and after: separate marketing apps merged into one Zylo5 app" loading="lazy"></figure>
+  <figure><img src="s13.jpg" width="1600" height="1328" alt="User flow from free scan to approved work, with edit and not-connected branches" loading="lazy"></figure>
+  <figure><img src="s14.jpg" width="1600" height="1413" alt="Information architecture: modules grouped by owner goal, with the grouped sidebar" loading="lazy"></figure>
+  <figure><img src="s03.jpg" width="1600" height="1761" alt="How I built it: brief, prompt, review, refine, ship" loading="lazy"></figure>
+  <figure><img src="s16.jpg" width="1600" height="1128" alt="Prompt-driven design: five steps and the screen prompt template" loading="lazy"></figure>
+  <figure><img src="s04.jpg" width="1600" height="1884" alt="Prompt in practice for the Google Listing screen" loading="lazy"></figure>
+  <figure><img src="s17.jpg" width="1600" height="1172" alt="Review checklist every screen passed before shipping" loading="lazy"></figure>
+  <figure><img src="s05.jpg" width="1600" height="1460" alt="Key screens in journey order: free scan, sign in, choose a business" loading="lazy"></figure>
+  <figure><img src="s06.jpg" width="1304" height="2576" alt="Brand story, Brand Kit and Media library" loading="lazy"></figure>
+  <figure><img src="s07.jpg" width="1600" height="1941" alt="Website content and Blog" loading="lazy"></figure>
+  <figure><img src="s08.jpg" width="1600" height="2100" alt="Google Ads and Meta Ads" loading="lazy"></figure>
+  <figure><img src="s09.jpg" width="1600" height="2202" alt="Featured screen: Google Listing" loading="lazy"></figure>
+  <figure><img src="s10.jpg" width="1358" height="2576" alt="Reviews, Social and Settings" loading="lazy"></figure>
+  <figure><img src="s11.jpg" width="1600" height="1387" alt="Six system patterns used in every module" loading="lazy"></figure>
+  <figure><img src="s15.jpg" width="1600" height="1070" alt="Pattern anatomy: six patterns annotated on one draft card" loading="lazy"></figure>
+  <section class="next" aria-labelledby="next-h">
+    <div class="next-in">
+      <div>
+        <p class="eyebrow">What I'd do next · Concept</p>
+        <h2 id="next-h">One screen for the <em>weekly check‑in.</em></h2>
+        <p class="lede">Owners come back to Zylo about once a week with two questions: what do I need to do, and is this working? Today they answer them by walking the sidebar module by module. A simple dashboard brings both answers onto one screen, in the agent's voice.</p>
+        <span class="badge">Concept · designed after the shipped scope</span>
+      </div>
+
+      <div class="pi">
+        <div><p class="k">The problem</p><h3>Approvals are scattered across modules</h3><p>Drafts, failures and results live in Blog, Google Ads, Meta Ads, Listing, Reviews and Social. To finish a weekly review, an owner has to visit each one, and something waiting in one module is easy to miss.</p></div>
+        <div><p class="k">The idea</p><h3>A dashboard that asks only for decisions</h3><p>Gather every pending draft, this week's schedule, anything broken and a few plain results into one view. The owner approves, fixes and leaves, usually in a few minutes.</p></div>
+      </div>
+
+      <div>
+        <div class="shot"><img src="d01.jpg" width="1440" height="900" alt="Zylo dashboard: greeting, four results, approval queue, this week strip and needs attention alerts" loading="lazy"></div>
+        <p class="cap">Zylo Dashboard · first screen</p>
+      </div>
+
+      <div class="dec">
+        <div><p class="n">01</p><h4>Approvals first</h4><p>One queue for drafts from every module, each with its source chip, a "Why" line and the same "Looks good" button used across the app.</p></div>
+        <div><p class="n">02</p><h4>Results in plain words</h4><p>Four cards owners understand without marketing knowledge: drafts waiting, items going out, reviews answered, calls from Google. No funnels or traffic charts.</p></div>
+        <div><p class="n">03</p><h4>Fixes at the point of need</h4><p>"Needs attention" names what broke and offers the one action that fixes it, like connecting Google or choosing a larger image.</p></div>
+        <div><p class="n">04</p><h4>The week at a glance</h4><p>A day strip with channel‑coloured dots shows what goes out and when, with today highlighted. The full calendar is one click away.</p></div>
+        <div><p class="n">05</p><h4>Show the agents' work</h4><p>A short activity feed of what the AI did on its own, such as pausing a weak ad. Visible work builds trust in an AI that acts for the owner.</p></div>
+        <div><p class="n">06</p><h4>Collapsed navigation</h4><p>The sidebar collapses to icons, grouped exactly as in the app, so the stage has room to breathe while every module stays one click away.</p></div>
+      </div>
+
+      <div>
+        <div class="shot"><img src="d02.jpg" width="1440" height="900" alt="Zylo dashboard scrolled: full approval queue with weekly progress, and what your agents did" loading="lazy"></div>
+        <p class="cap">Zylo Dashboard · scrolled · full queue, weekly progress and agent activity</p>
+      </div>
+
+      <div>
+        <p class="eyebrow">How I'd measure it</p>
+        <div class="measure" style="margin-top:16px"><span>Time to clear weekly approvals</span><span>Drafts approved without edits</span><span>Drafts left waiting over 48 hours</span><span>Weekly return rate</span><span>Connections fixed from alerts</span></div>
+      </div>
+    </div>
+  </section>
+  <footer>Bijnesh Kumar Singh · <a href="mailto:bijneshman@gmail.com" style="color:var(--mint);text-decoration:none">bijneshman@gmail.com</a></footer>
+</div>
+
+</body></html>

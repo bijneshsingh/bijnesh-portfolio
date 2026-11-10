@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Zylo Dashboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Zylo app shell — 72px collapsed dark sidebar + light stage; stage = greeting row, 4 plain-language stats, approval queue (2/3) beside schedule / attention / agent activity (1/3). Fixed 1440 frame, scaled to fit. Committed to Zylo's light app world (single theme). */
+:root{--d-bg:#0D0418;--d-s:#1E0A3C;--l-bg:#F8F7FC;--white:#FFFFFF;--surf:#F2F0F9;--line:#E4E0F2;--line2:#C8C0E8;--text:#0D0418;--body:#3D2670;--sub:#6B50A0;
+--violet:#5B21B6;--vm:#7C3AED;--vs:#9F6CF5;--vp:#EDE8FF;--mint:#34D399;--ms:#059669;--mp:#ECFDF5;--amber:#F59E0B;--ap:#FEF3C7;--red:#DC2626;--rp:#FEE2E2;
+--ff:"Geologica","Inter","Segoe UI",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,Menlo,monospace;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:#E9E6F4;color:var(--text);font-family:var(--ff);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.stage-wrap{max-width:1440px;margin:24px auto;}
+.fit{width:100%;aspect-ratio:1440/900;position:relative;overflow:hidden;border-radius:14px;box-shadow:0 30px 80px -30px rgba(91,33,182,.45)}
+.app{position:absolute;inset:0 auto auto 0;width:1440px;height:900px;transform-origin:0 0;display:grid;grid-template-columns:60px 1fr;background:var(--l-bg)}
+svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+p{margin:0}
+/* sidebar (collapsed) */
+.side{position:relative;height:900px;background:linear-gradient(180deg,#160630 0%,#10041f 50%,#0B0316 100%);display:flex;flex-direction:column;align-items:stretch}
+.side::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--vs),var(--mint))}
+.logo{width:26px;height:auto;display:block;margin:20px auto 18px}
+.grp{display:grid;gap:2px;padding:12px 0;border-top:1px solid rgba(255,255,255,.08)}
+.nv{position:relative;height:38px;display:grid;place-items:center;color:rgba(255,255,255,.55)}
+.nv svg{width:18px;height:18px;stroke-width:1.6}
+.nv.on{color:#fff;background:linear-gradient(90deg,rgba(124,58,237,.38),rgba(124,58,237,.12))}
+.nv.on::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 3px 3px 0;background:var(--vs)}
+.side .grow{flex:1}
+.bot{display:grid;justify-items:center;gap:10px;padding:10px 0 16px;border-top:1px solid rgba(255,255,255,.08)}
+.bot .nv{width:100%}
+.me{width:34px;height:34px;border-radius:50%;background:var(--vm);color:#fff;display:grid;place-items:center;font:600 12px var(--ff);box-shadow:0 0 0 2px rgba(159,108,245,.35)}
+/* stage */
+.main{display:grid;grid-template-rows:auto 1fr;min-width:0;min-height:0;height:900px}
+.body{overflow-y:auto!important;min-height:0;scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+.top{display:flex;align-items:center;gap:16px;padding:18px 48px;background:var(--white);border-bottom:1px solid var(--line)}
+.biz{display:flex;align-items:center;gap:12px}
+.biz .bl{width:36px;height:36px;border-radius:10px;background:#F2994A;color:#fff;display:grid;place-items:center;font:800 13px var(--ff)}
+.biz b{font-size:15px;display:block}
+.biz small{font:500 11px var(--mono);letter-spacing:1.5px;color:var(--ms)}
+.biz small::before{content:"●";margin-right:6px;font-size:9px}
+.search{flex:1;max-width:420px;margin-left:24px;display:flex;align-items:center;gap:10px;background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--sub);font-size:14px}
+.top .sp{flex:1}
+.pill-week{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:14px;color:var(--body)}
+.icon-b{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;color:var(--body);position:relative}
+.icon-b i{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--red);border:2px solid #fff}
+.body{padding:40px 48px 48px;display:grid;gap:30px;align-content:start;overflow:hidden;background:radial-gradient(ellipse 60% 50% at 100% 0%,rgba(159,108,245,.10),transparent 60%),var(--l-bg)}
+.hello{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.hello .eb{font:500 11px var(--mono);letter-spacing:3px;color:var(--violet);text-transform:uppercase}
+.hello h1{margin:8px 0 6px;font-size:34px;font-weight:800;letter-spacing:-1.2px;line-height:1.05}
+.hello h1 em{font-style:normal;color:var(--violet)}
+.hello p{color:var(--body);font-weight:300;font-size:16px}
+.cta-all{display:flex;align-items:center;gap:10px;background:var(--violet);color:#fff;border:0;border-radius:12px;padding:14px 20px;font:700 15px var(--ff);box-shadow:0 12px 30px -12px rgba(91,33,182,.7)}
+.cta-all svg{width:18px;height:18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.st{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px 22px;display:grid;gap:10px;position:relative;overflow:hidden}
+.st::before{content:"";position:absolute;inset:0 0 auto 0;height:3px}
+.st:nth-child(1)::before{background:var(--vs)}.st:nth-child(2)::before{background:linear-gradient(90deg,var(--vs),var(--mint))}.st:nth-child(3)::before,.st:nth-child(4)::before{background:var(--mint)}
+.st .k{font:500 10.5px var(--mono);letter-spacing:2px;color:var(--sub);text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.st .k svg{width:15px;height:15px;color:var(--vm)}
+.st .v{font-size:30px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums;line-height:1}
+.st .v small{font-size:14px;font-weight:500;color:var(--sub);letter-spacing:0;margin-left:6px}
+.st .n{font-size:13px;color:var(--body);font-weight:300}
+.st .n b{font-weight:600;color:var(--ms)}
+.grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:24px;align-items:stretch}
+.qcard{display:flex;flex-direction:column}
+.qfoot{margin-top:auto;padding-top:20px;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px;font-size:13px;color:var(--body)}
+.qfoot .bar{flex:1;height:8px;border-radius:99px;background:var(--surf);overflow:hidden}
+.qfoot .bar i{display:block;height:100%;width:67%;background:linear-gradient(90deg,var(--vs),var(--mint));border-radius:99px}
+.qfoot b{color:var(--text)}
+.card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:24px 26px}
+.ch{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.ch h2{margin:0;font-size:17px;font-weight:700;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+.cnt{font:500 11px var(--mono);background:var(--vp);color:var(--violet);padding:3px 8px;border-radius:99px}
+.ch a{font-size:13px;color:var(--vm);font-weight:600;display:flex;align-items:center;gap:6px}
+.ch a svg{width:15px;height:15px}
+.tabs{display:flex;gap:8px;margin-bottom:10px}
+.tabs span{font:500 12px var(--ff);padding:6px 12px;border-radius:99px;border:1px solid var(--line);color:var(--body)}
+.tabs span.on{background:var(--d-bg);color:#fff;border-color:var(--d-bg)}
+.q{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:16px;align-items:center;padding:18px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:0}
+.q-ic,.a-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center}
+.q-social{background:#FCE7F3;color:#BE185D}.q-gads{background:#E0F2FE;color:#0369A1}.q-review{background:var(--ap);color:#B45309}.q-blog{background:var(--mp);color:var(--ms)}.q-meta{background:var(--vp);color:var(--violet)}.q-pin{background:#FFEDD5;color:#C2410C}
+.q-main{min-width:0;display:grid;gap:6px}
+.q-top{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;min-width:0}
+.q-top b{font-size:14.5px;white-space:nowrap}
+.q-meta{font-size:12.5px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{font:500 10px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--ms);background:var(--mp);border:1px solid rgba(5,150,105,.2);padding:3px 8px;border-radius:99px;white-space:nowrap}
+.q-body{font-size:13.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.q-why{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--sub);white-space:nowrap;overflow:hidden}
+.q-why svg{width:13px;height:13px;color:var(--vs)}
+.q-why span{overflow:hidden;text-overflow:ellipsis}
+.q-why b{color:var(--body);font-weight:600}
+.q-act{display:flex;gap:8px}
+.q-act button{display:flex;align-items:center;gap:6px;font:600 13px var(--ff);border-radius:10px;padding:9px 12px;white-space:nowrap}
+.q-act svg{width:15px;height:15px}
+.b-ghost{background:var(--white);border:1px solid var(--line2);color:var(--body)}
+.b-ok{background:var(--mint);border:1px solid var(--mint);color:var(--d-bg)}
+.side-col{display:grid;gap:24px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{border:1px solid var(--line);border-radius:12px;padding:8px 0 10px;display:grid;justify-items:center;gap:2px;background:var(--l-bg)}
+.day span{font:500 10px var(--mono);letter-spacing:1px;color:var(--sub);text-transform:uppercase}
+.day b{font-size:16px}
+.day.today{background:var(--d-bg);border-color:var(--d-bg)}.day.today span{color:var(--mint)}.day.today b{color:#fff}
+.dots{display:flex;gap:3px;height:6px;margin-top:2px}
+.dots i{width:6px;height:6px;border-radius:50%}
+.d-soc{background:#EC4899}.d-ads{background:#0EA5E9}.d-rev{background:var(--amber)}.d-blog{background:var(--ms)}.d-meta{background:var(--vm)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:12px;font-size:12px;color:var(--sub)}
+.legend span{display:flex;align-items:center;gap:6px}.legend i{width:7px;height:7px;border-radius:50%}
+.att{display:grid;gap:12px}
+.at{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;padding:14px;border-radius:12px}
+.at.warn{background:#FFFBEB;border:1px solid #FDE68A}.at.err{background:#FEF2F2;border:1px solid #FECACA}
+.at .ai{width:34px;height:34px;border-radius:10px;display:grid;place-items:center}
+.at.warn .ai{background:var(--ap);color:#B45309}.at.err .ai{background:var(--rp);color:var(--red)}
+.at b{font-size:13.5px;display:block}
+.at p{font-size:12.5px;color:var(--body);font-weight:300;margin-top:2px}
+.at button{margin-top:8px;font:600 12.5px var(--ff);border-radius:8px;padding:7px 11px;border:0;background:var(--d-bg);color:#fff}
+.acts{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.acts li{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center}
+.acts .a-ic{width:32px;height:32px;border-radius:9px}.acts .a-ic svg{width:16px;height:16px}
+.a-t{font-size:13px;color:var(--text);line-height:1.35}
+.a-w{font:400 11px var(--mono);color:var(--sub);white-space:nowrap}
+.foot-note{text-align:center;font:500 11px var(--mono);letter-spacing:2px;color:var(--sub);text-transform:uppercase;margin:14px 0 28px}
+</style>
+
+<a href="../index.html" style="position:fixed;top:16px;left:16px;z-index:999;font:600 14px/1 system-ui,-apple-system,Segoe UI,sans-serif;color:#fff;background:rgba(13,4,24,.85);padding:10px 14px;border-radius:999px;text-decoration:none;border:1px solid rgba(255,255,255,.2)">← Portfolio</a>
+<div class="stage-wrap" style="margin-top:72px">
+<div class="fit" id="fit">
+<div class="app" id="app">
+  <aside class="side">
+    <svg class="logo" viewBox="0 9.5 50.5 50.5" aria-label="Zylo"><!-- Logomark -->
+  <path d="M49.0646 23.7959V45.6964C49.0646 53.0029 43.1552 58.9123 35.8487 58.9123H27.9192C32.0917 58.9123 35.8676 57.2131 38.6052 54.4944C41.3427 51.7568 43.023 47.9809 43.023 43.8084C43.023 35.4636 36.2641 28.7046 27.9192 28.7046H12.8154V10.6367C13.193 10.599 13.5706 10.5801 13.9482 10.5801H35.8487C43.1552 10.5801 49.0646 16.4894 49.0646 23.7959Z" fill="#34D399" stroke="#9F6CF5" stroke-width="1.46484" stroke-miterlimit="10"/>
+  <path d="M43.0231 43.808C43.0231 47.9804 41.3428 51.7563 38.6052 54.4939C35.8676 57.2315 32.0917 58.9118 27.9193 58.9118H13.9483C6.64179 58.9118 0.732422 53.0024 0.732422 45.6959V23.7954C0.732422 16.8854 6.03763 11.2026 12.8155 10.6362V28.7041H27.9193C36.2641 28.7041 43.0231 35.4631 43.0231 43.808Z" fill="#5B21B6" stroke="#9F6CF5" stroke-width="1.46484" stroke-miterlimit="10"/>
+  <path d="M7.52917 20.2275H37.8878" stroke="#1E0A3C" stroke-width="1.46484" stroke-miterlimit="10"/>
+
+  </svg>
+    <div class="grp"><a class="nv on" title="Home" aria-label="Home"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></a><a class="nv" title="Getting Started" aria-label="Getting Started"><svg viewBox="0 0 24 24" aria-hidden="true" ><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></a></div><div class="grp"><a class="nv" title="Brand Kit" aria-label="Brand Kit"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg></a><a class="nv" title="Media" aria-label="Media"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></a></div><div class="grp"><a class="nv" title="Websites" aria-label="Websites"><svg viewBox="0 0 24 24" aria-hidden="true" ><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></a><a class="nv" title="Blog" aria-label="Blog"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h7M9 8h3"/></svg></a></div><div class="grp"><a class="nv" title="Google Ads" aria-label="Google Ads"><svg viewBox="0 0 24 24" aria-hidden="true" ><circle cx="12" cy="12" r="9"/><path d="M15.5 9.5A4.5 4.5 0 1 0 16 13h-4"/></svg></a><a class="nv" title="Meta Ads" aria-label="Meta Ads"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M14 21v-8h3l.5-3H14V8.6c0-.9.4-1.6 1.7-1.6h1.9V4.2A19 19 0 0 0 15.1 4C12.6 4 11 5.6 11 8.3V10H8v3h3v8"/></svg></a></div><div class="grp"><a class="nv" title="Google Listing" aria-label="Google Listing"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></a><a class="nv" title="Reviews" aria-label="Reviews"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M7 10v11H4V10zM7 10l4-7c1.5 0 2.5 1 2.5 2.5V9H19a2 2 0 0 1 2 2.3l-1.3 7.5A2 2 0 0 1 17.7 21H7"/></svg></a><a class="nv" title="Social" aria-label="Social"><svg viewBox="0 0 24 24" aria-hidden="true" ><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg></a></div>
+    <span class="grow"></span>
+    <div class="bot"><a class="nv" title="Settings" aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></a><span class="me" title="Bijnesh Kumar Singh">BS</span></div>
+  </aside>
+  <section class="main">
+    <header class="top">
+      <div class="biz"><span class="bl">GCS</span><div><b>GCS Technologies</b><small>LIVE · AUSTIN, TX</small></div></div>
+      <div class="search"><svg viewBox="0 0 24 24" aria-hidden="true" ><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Search drafts, posts, reviews…</div>
+      <span class="sp"></span>
+      <div class="pill-week"><svg viewBox="0 0 24 24" aria-hidden="true" ><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>This week · Sep 14 – 20</div>
+      <span class="icon-b"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></svg><i></i></span>
+    </header>
+    <div class="body">
+      <div class="hello">
+        <div>
+          <p class="eb">Dashboard</p>
+          <h1>Good morning. <em>6 drafts</em> are ready for you.</h1>
+          <p>I drafted this week's posts, ads and replies. Approving them takes about 4 minutes.</p>
+        </div>
+        <button class="cta-all"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Review all 6 drafts</button>
+      </div>
+      <div class="stats">
+        <div class="st"><span class="k"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Waiting for you</span><span class="v">6<small>drafts</small></span><span class="n">Oldest drafted 2 days ago</span></div>
+        <div class="st"><span class="k"><svg viewBox="0 0 24 24" aria-hidden="true" ><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Going out this week</span><span class="v">11<small>items</small></span><span class="n">Across Google, Facebook, Instagram</span></div>
+        <div class="st"><span class="k"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 3l2.8 5.8 6.2.9-4.5 4.4 1.1 6.2L12 17.4 6.4 20.3l1.1-6.2L3 9.7l6.2-.9z"/></svg>Reviews answered</span><span class="v">9<small>of 9</small></span><span class="n">Average reply time <b>6 hours</b></span></div>
+        <div class="st"><span class="k"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Calls from Google</span><span class="v">14<small>this week</small></span><span class="n"><b>+4</b> vs last week · 340 listing views</span></div>
+      </div>
+      <div class="grid">
+        <div class="card qcard">
+          <div class="ch"><h2>Waiting for you <span class="cnt">6</span></h2><a>Open approval queue <svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="tabs"><span class="on">All 6</span><span>Social 1</span><span>Ads 2</span><span>Reviews 1</span><span>Listing 1</span><span>Blog 1</span></div>
+          <article class="q">
+  <div class="q-ic q-social"><svg viewBox="0 0 24 24" aria-hidden="true" ><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg></div>
+  <div class="q-main">
+    <div class="q-top"><b>Social post</b><span class="q-meta">Instagram + Facebook · Tue 9:00 AM</span><span class="chip">From your scan</span></div>
+    <p class="q-body">“This is where your IT support actually happens.” Photo from your operations centre.</p>
+    <p class="q-why"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span><b>Why:</b> Your top-rated reviews mention fast response. This post shows the team behind it.</span></p>
+  </div>
+  <div class="q-act"><button class="b-ghost"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>Edit</button><button class="b-ok"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Looks good</button></div>
+</article><article class="q">
+  <div class="q-ic q-gads"><svg viewBox="0 0 24 24" aria-hidden="true" ><circle cx="12" cy="12" r="9"/><path d="M15.5 9.5A4.5 4.5 0 1 0 16 13h-4"/></svg></div>
+  <div class="q-main">
+    <div class="q-top"><b>Google Ads angle</b><span class="q-meta">Search · Managed IT Services</span><span class="chip">Strength: Excellent</span></div>
+    <p class="q-body">Stop Downtime &amp; Data Loss · Flat monthly IT support fee</p>
+    <p class="q-why"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span><b>Why:</b> Matches what Austin businesses search for most this month.</span></p>
+  </div>
+  <div class="q-act"><button class="b-ghost"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>Edit</button><button class="b-ok"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Looks good</button></div>
+</article><article class="q">
+  <div class="q-ic q-review"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M7 10v11H4V10zM7 10l4-7c1.5 0 2.5 1 2.5 2.5V9H19a2 2 0 0 1 2 2.3l-1.3 7.5A2 2 0 0 1 17.7 21H7"/></svg></div>
+  <div class="q-main">
+    <div class="q-top"><b>Review reply</b><span class="q-meta">Earlene Folmar · ★★★★★</span><span class="chip">Ready to post</span></div>
+    <p class="q-body">“Justin was AMAZING! He felt every concern…” — reply drafted, thanks Justin by name.</p>
+    <p class="q-why"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span><b>Why:</b> Replies within 24 hours lift your Google ranking.</span></p>
+  </div>
+  <div class="q-act"><button class="b-ghost"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>Edit</button><button class="b-ok"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Looks good</button></div>
+</article><article class="q">
+  <div class="q-ic q-blog"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h7M9 8h3"/></svg></div>
+  <div class="q-main">
+    <div class="q-top"><b>Blog topic</b><span class="q-meta">How‑to guide · 5 min read</span><span class="chip">Certified M365 partner</span></div>
+    <p class="q-body">How to plan an Austin cloud migration to Microsoft 365 without downtime</p>
+    <p class="q-why"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span><b>Why:</b> Positions you for “cloud migration Austin” searches.</span></p>
+  </div>
+  <div class="q-act"><button class="b-ghost"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>Edit</button><button class="b-ok"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Looks good</button></div>
+</article><article class="q">
+  <div class="q-ic q-pin"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+  <div class="q-main">
+    <div class="q-top"><b>Google listing update</b><span class="q-meta">About text · Services</span><span class="chip">595 / 750 chars</span></div>
+    <p class="q-body">Adds “Cloud Migration” and “Security Operations Center” to your services list.</p>
+    <p class="q-why"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span><b>Why:</b> Owners search these services; your listing doesn't mention them yet.</span></p>
+  </div>
+  <div class="q-act"><button class="b-ghost"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>Edit</button><button class="b-ok"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Looks good</button></div>
+</article><article class="q">
+  <div class="q-ic q-meta"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M14 21v-8h3l.5-3H14V8.6c0-.9.4-1.6 1.7-1.6h1.9V4.2A19 19 0 0 0 15.1 4C12.6 4 11 5.6 11 8.3V10H8v3h3v8"/></svg></div>
+  <div class="q-main">
+    <div class="q-top"><b>Meta ad</b><span class="q-meta">Feed + Story · 3 days</span><span class="chip">Within Meta limits</span></div>
+    <p class="q-body">“For over 25 years, Austin businesses have turned to GCS for managed IT.”</p>
+    <p class="q-why"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span><b>Why:</b> Your 25+ years is the proof point owners trust most.</span></p>
+  </div>
+  <div class="q-act"><button class="b-ghost"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>Edit</button><button class="b-ok"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Looks good</button></div>
+</article>
+          <div class="qfoot"><span><b>12 of 18</b> approved this week</span><span class="bar"><i></i></span><span>You've spent <b>5 min</b> in Zylo</span></div>
+        </div>
+        <div class="side-col">
+          <div class="card">
+            <div class="ch"><h2>This week</h2><a>Calendar <svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            <div class="week"><div class="day"><span>Mon</span><b>14</b><div class="dots"></div></div><div class="day"><span>Tue</span><b>15</b><div class="dots"><i class="d-soc"></i><i class="d-ads"></i></div></div><div class="day"><span>Wed</span><b>16</b><div class="dots"><i class="d-rev"></i></div></div><div class="day today"><span>Thu</span><b>17</b><div class="dots"><i class="d-blog"></i><i class="d-soc"></i></div></div><div class="day"><span>Fri</span><b>18</b><div class="dots"><i class="d-ads"></i><i class="d-meta"></i></div></div><div class="day"><span>Sat</span><b>19</b><div class="dots"><i class="d-soc"></i></div></div><div class="day"><span>Sun</span><b>20</b><div class="dots"></div></div></div>
+            <div class="legend"><span><i class="d-soc"></i>Social</span><span><i class="d-ads"></i>Google Ads</span><span><i class="d-meta"></i>Meta</span><span><i class="d-rev"></i>Reviews</span><span><i class="d-blog"></i>Blog</span></div>
+          </div>
+          <div class="card">
+            <div class="ch"><h2>Needs attention <span class="cnt" style="background:var(--rp);color:var(--red)">2</span></h2></div>
+            <div class="att">
+              <div class="at err"><span class="ai"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/></svg></span><div><b>Google isn't connected yet</b><p>3 review replies are ready but can't be posted until you connect.</p><button>Connect Google</button></div></div>
+              <div class="at warn"><span class="ai"><svg viewBox="0 0 24 24" aria-hidden="true" ><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></span><div><b>Meta ad image is too small</b><p>Needs at least 1080 × 1080. I picked 2 replacements from your media.</p><button>Choose image</button></div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><h2>What your agents did</h2></div>
+            <ul class="acts"><li><span class="a-ic q-review"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M7 10v11H4V10zM7 10l4-7c1.5 0 2.5 1 2.5 2.5V9H19a2 2 0 0 1 2 2.3l-1.3 7.5A2 2 0 0 1 17.7 21H7"/></svg></span><span class="a-t">Drafted replies to 3 new Google reviews</span><span class="a-w">12 min ago</span></li><li><span class="a-ic q-gads"><svg viewBox="0 0 24 24" aria-hidden="true" ><circle cx="12" cy="12" r="9"/><path d="M15.5 9.5A4.5 4.5 0 1 0 16 13h-4"/></svg></span><span class="a-t">Paused a weak ad angle (CTR 0.8%) and drafted a stronger one</span><span class="a-w">2 h ago</span></li><li><span class="a-ic q-social"><svg viewBox="0 0 24 24" aria-hidden="true" ><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg></span><span class="a-t">Scheduled 4 posts for Tue–Sat in your Central Time</span><span class="a-w">Yesterday</span></li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
+<p class="foot-note">Zylo Dashboard · Bijnesh Kumar Singh</p>
+</div>
+<script>
+(function(){var f=document.getElementById('fit'),a=document.getElementById('app');function s(){var k=f.clientWidth/1440;a.style.transform='scale('+k+')';}s();window.addEventListener('resize',s);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(s);})();
+</script>
+
+</body></html>
